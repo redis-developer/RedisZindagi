@@ -367,3 +367,4 @@ persistence/
 !data/libraries/Telerik.*.nupkg
 
 lib/
+.env.local
