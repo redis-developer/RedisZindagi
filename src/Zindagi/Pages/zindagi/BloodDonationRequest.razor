@@ -1,0 +1,57 @@
+@page "/blood-donation-request/{RequestId:guid}"
+@attribute [Authorize]
+
+<h3>Request Details</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-8 col-lg-4 mx-auto">
+            <table class="table table-hover table-borderless">
+                <tbody>
+                <tr>
+                    <th scope="row">Patient Name</th>
+                    <td>@_request.PatientName</td>
+                </tr>
+                <tr>
+                    <th scope="row">Reason</th>
+                    <td>@_request.Reason</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">Blood Group</th>
+                    <td>@_request.BloodGroup.GetDescription()</td>
+                </tr>
+                <tr>
+                    <th scope="row">Unit(s)</th>
+                    <td>@_request.QuantityInUnits</td>
+                </tr>
+                <tr>
+                    <th scope="row">Donation Type</th>
+                    <td>@_request.DonationType.GetDescription()</td>
+                </tr>
+                <tr>
+                    <th scope="row">Priority</th>
+                    <td>@_request.Priority.GetDescription()</td>
+                </tr>
+                <tr>
+                    <th scope="row">Status</th>
+                    <td>@_request.Status.GetDescription()</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public Guid RequestId { get; set; }
+
+    private BloodRequestDto _request = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _request = await _mediator.Send(new GetBloodRequest { RequestId = RequestId });
+    }
+
+}

@@ -1,0 +1,147 @@
+﻿@page "/user-profile"
+@attribute [Authorize]
+
+<h3>User Profile</h3>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-8 col-lg-4 mx-auto">
+            <EditForm Model="_user" OnValidSubmit="HandleValidSubmit" OnInvalidSubmit="HandleInvalidSubmit">
+                <DataAnnotationsValidator/>
+                <div class="row mb-2">
+                    <label for="@nameof(_user.FirstName)" class="col-form-label">First Name</label>
+                    <div>
+                        <TelerikTextBox @bind-Value="_user.FirstName" Width="100%"></TelerikTextBox>
+                        <TelerikValidationMessage For="@(() => _user.FirstName)"/>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <label for="@nameof(_user.MiddleName)" class="col-form-label">Middle Name</label>
+                    <div>
+                        <TelerikTextBox @bind-Value="_user.MiddleName" Width="100%"></TelerikTextBox>
+                        <TelerikValidationMessage For="@(() => _user.MiddleName)"/>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <label for="@nameof(_user.LastName)" class="col-form-label">Last Name</label>
+                    <div>
+                        <TelerikTextBox @bind-Value="_user.LastName" Width="100%"></TelerikTextBox>
+                        <TelerikValidationMessage For="@(() => _user.LastName)"/>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <label for="@nameof(_user.Email)" class="col-form-label">Email</label>
+                    <div>
+                        <TelerikTextBox @bind-Value="_user.Email" Width="100%" Title="Email Address"></TelerikTextBox>
+                        <TelerikValidationMessage For="@(() => _user.Email)"/>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <label for="@nameof(_user.MobileNumber)" class="col-form-label">Mobile Number</label>
+                    <div>
+                        <TelerikMaskedTextBox @bind-Value="_user.MobileNumber" Width="100%" Mask="0000000000" Title="Mobile Number"></TelerikMaskedTextBox>
+                        <TelerikValidationMessage For="@(() => _user.MobileNumber)"/>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <label for="@nameof(_user.BloodGroup)" class="col-form-label">Blood Group</label>
+                    <div>
+                        <TelerikDropDownList @bind-Value="_user.BloodGroup" Width="100%" Data="Enumeration.GetKeyValues<BloodGroup>()" ValueField="Value" TextField="Value">
+                        </TelerikDropDownList>
+                        <TelerikValidationMessage For="@(() => _user.BloodGroup)"/>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <label for="@nameof(_user.DateOfBirth)" class="col-form-label">Date Of Birth</label>
+                    <div>
+                        <TelerikDatePicker @bind-Value="_user.DateOfBirth" Width="100%" Min="Min" Max="Max" Format="dd-MMM-yyyy" View="CalendarView.Century">
+                        </TelerikDatePicker>
+                        <TelerikValidationMessage For="@(() => _user.DateOfBirth)"/>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="text-center">
+                        <TelerikButton ButtonType="@ButtonType.Submit" Primary="true">Save Profile</TelerikButton>
+                    </div>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+    <TelerikNotification @ref="Notification"
+                         HorizontalPosition="NotificationHorizontalPosition.Right"
+                         VerticalPosition="NotificationVerticalPosition.Bottom">
+    </TelerikNotification>
+</div>
+
+
+@code {
+    UserDto _user = new();
+    public DateTime Max = DateTime.UtcNow.AddYears(-5);
+    public DateTime Min = DateTime.UtcNow.AddYears(-80);
+    private TelerikNotification Notification { get; set; } = null!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var userInfo = await _mediator.Send(new GetCurrentUser());
+        if (userInfo.IsSuccess)
+        {
+            _user = userInfo.Value;
+            if (_user.DateOfBirth == DateTime.MinValue)
+                _user.DateOfBirth = null;
+        }
+        else
+        {
+            _navManager.NavigateTo("/login");
+        }
+    }
+
+    async Task HandleValidSubmit()
+    {
+        var command = new UpdateUserInfo
+        {
+            FirstName = _user.FirstName,
+            MiddleName = _user.MiddleName,
+            LastName = _user.LastName,
+            Email = _user.Email,
+            MobileNumber = _user.MobileNumber,
+            BloodGroup = Enumeration.FromDisplayName<BloodGroup>(_user.BloodGroup),
+            DateOfBirth = _user.DateOfBirth?.Date ?? default
+        };
+        var result = await _mediator.Send(command);
+
+        if (result.IsSuccess)
+        {
+            Notification.Show(new NotificationModel
+            {
+                Text = "Profile updated, thank you.",
+                ThemeColor = "success"
+            });
+        }
+        else
+        {
+            Notification.Show(new NotificationModel
+            {
+                Text = "Profile update failed, please try again.",
+                ThemeColor = "error"
+            });
+        }
+    }
+
+    void HandleInvalidSubmit()
+    {
+        Notification.Show(new NotificationModel
+        {
+            Text = "Please resolve the errors and try again",
+            ThemeColor = "warning",
+            CloseAfter = 0
+        });
+    }
+
+}

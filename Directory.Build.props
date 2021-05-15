@@ -1,0 +1,68 @@
+<!--EXTERNAL_PROPERTIES: IsPackable-->
+<Project>
+  <PropertyGroup>
+    <Deterministic>true</Deterministic>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+
+    <Authors>Bhanu Prakash Korthiwada</Authors>
+    <Copyright>Copyright © Zindagi</Copyright>
+    <Company>Zindagi</Company>
+
+    <PackageProjectUrl>https://github.com/BhanuKorthiwada/RedisZindagi</PackageProjectUrl>
+    <PackageIcon>icon.png</PackageIcon>
+    <RepositoryType>git</RepositoryType>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <RepositoryUrl>https://github.com/BhanuKorthiwada/RedisZindagi</RepositoryUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
+
+    <NoWarn>$(NoWarn);MINVER1001</NoWarn>
+    <MyProjectPrefix>Zindagi</MyProjectPrefix>
+    <MinVerSkip Condition="'$(Configuration)' == 'Debug'">true</MinVerSkip>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(IsPackable) == True">
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+
+  <!-- File Includes -->
+  <ItemGroup>
+    <None Include="../../docs/icon.png" Pack="true" Visible="false" PackagePath="" />
+  </ItemGroup>
+
+  <!-- Target Frameworks -->
+  <PropertyGroup>
+    <ApplicationTargetFramework>net5.0</ApplicationTargetFramework>
+    <LibraryTargetFramework>net5.0</LibraryTargetFramework>
+    <LibraryTargetFrameworks>netcoreapp3.1;net5.0</LibraryTargetFrameworks>
+  </PropertyGroup>
+
+  <!-- MinVer -->
+  <PropertyGroup>
+    <MinVerTagPrefix>v</MinVerTagPrefix>
+    <MinVerDefaultPreReleasePhase>preview</MinVerDefaultPreReleasePhase>
+    <MinVerVerbosity>minimal</MinVerVerbosity>
+    <MinVerMinimumMajorMinor>1.0</MinVerMinimumMajorMinor>
+  </PropertyGroup>
+
+  <!-- Library: NuGet Default Dependencies -->
+  <ItemGroup Condition="$(IsPackable) == 'true'">
+    <PackageReference Include="MinVer" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(Configuration) == 'Debug'">
+    <PackageReference Include="SonarAnalyzer.CSharp">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+</Project>

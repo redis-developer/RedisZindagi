@@ -1,0 +1,12 @@
+<!--EXTERNAL_PROPERTIES: LibraryTargetFramework-->
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>$(LibraryTargetFramework)</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Zindagi.SeedWork\Zindagi.SeedWork.csproj" />
+  </ItemGroup>
+
+</Project>

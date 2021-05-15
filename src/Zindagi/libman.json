@@ -1,0 +1,45 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "provider": "unpkg",
+      "library": "@progress/kendo-theme-default@latest",
+      "destination": "wwwroot/lib/kendo/default/",
+      "files": [
+        "dist/all.css"
+      ]
+    },
+    {
+      "provider": "unpkg",
+      "library": "@progress/kendo-theme-bootstrap@latest",
+      "destination": "wwwroot/lib/kendo/bootstrap/",
+      "files": [
+        "dist/all.css"
+      ]
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "bootstrap@5.0.1",
+      "destination": "wwwroot/lib/bootstrap/",
+      "files": [
+        "dist/css/bootstrap.css",
+        "dist/css/bootstrap.min.css",
+        "dist/js/bootstrap.bundle.js",
+        "dist/js/bootstrap.bundle.min.js"
+      ]
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "bootstrap-icons@1.5.0",
+      "destination": "wwwroot/lib/bootstrap-icons/",
+      "files": [
+        "font/fonts/bootstrap-icons.woff",
+        "font/fonts/bootstrap-icons.woff2",
+        "font/bootstrap-icons.min.css",
+        "font/bootstrap-icons.css",
+        "bootstrap-icons.svg"
+      ]
+    }
+  ]
+}

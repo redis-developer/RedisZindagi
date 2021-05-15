@@ -1,0 +1,33 @@
+﻿@using System.Net.Http
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+@using Microsoft.JSInterop
+
+@using Telerik.Blazor
+@using Telerik.Blazor.Components
+
+@using Blazored.FluentValidation
+
+@using Zindagi
+@using Zindagi.Shared
+@using Zindagi.SeedWork
+
+@using Zindagi.Domain
+@using Zindagi.Infra
+
+@using Zindagi.Domain.UserAggregate.Queries
+@using Zindagi.Domain.UserAggregate.Commands
+@using Zindagi.Domain.UserAggregate.ViewModels
+
+@using Zindagi.Domain.RequestsAggregate
+@using Zindagi.Domain.RequestsAggregate.Queries
+@using Zindagi.Domain.RequestsAggregate.Commands
+@using Zindagi.Domain.RequestsAggregate.ViewModels
+
+@using MediatR
+@inject IMediator _mediator
+@inject NavigationManager _navManager

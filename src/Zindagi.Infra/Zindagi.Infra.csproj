@@ -1,0 +1,25 @@
+<!--EXTERNAL_PROPERTIES: LibraryTargetFramework-->
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>$(LibraryTargetFramework)</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StackExchange.Redis" />
+    <PackageReference Include="FluentValidation.AspNetCore" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" />
+
+    <PackageReference Include="Microsoft.AspNetCore.Components" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" />
+
+    <PackageReference Include="NRediSearch" />
+    <PackageReference Include="NReJSON" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Zindagi.Domain\Zindagi.Domain.csproj" />
+  </ItemGroup>
+</Project>

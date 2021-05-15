@@ -1,0 +1,86 @@
+@page "/requests"
+@attribute [Authorize]
+
+<h3>Requests</h3>
+
+<div class="container">
+    <div class="row mb-5">
+        <div class="col-sm-12 col-md-8 col-lg-4 mx-auto">
+            <TelerikForm Model="@_vm" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit" ValidationMessageType="@FormValidationMessageType.Inline" Orientation="FormOrientation.Horizontal">
+                <FormValidation>
+                    <FluentValidationValidator DisableAssemblyScanning="@true" />
+                </FormValidation>
+                <FormItems>
+                    <FormItem LabelText="Search" Field="@(nameof(_vm.SearchQuery))" />
+                </FormItems>
+                <FormButtons>
+                    <TelerikButton ButtonType="ButtonType.Submit" Primary="true" Title="Search requests">Search</TelerikButton>
+                </FormButtons>
+            </TelerikForm>
+        </div>
+    </div>
+
+    <TelerikGrid Data="@_searchResults" Class="@_css" OnRowClick="OnSelection">
+        <GridColumns>
+            <GridColumn Field="@(nameof(BloodRequestSearchRecordDto.RequestId))" Visible="false">
+            </GridColumn>
+            <GridColumn Field="@(nameof(BloodRequestSearchRecordDto.PatientName))" Title="Patient Name">
+            </GridColumn>
+            <GridColumn Field="@(nameof(BloodRequestSearchRecordDto.BloodGroup))" Title="Blood Group">
+            </GridColumn>
+            <GridColumn Field="@(nameof(BloodRequestSearchRecordDto.DonationType))" Title="Donation Type">
+            </GridColumn>
+            <GridColumn Field="@(nameof(BloodRequestSearchRecordDto.QuantityInUnits))" Title="Unit(s)">
+            </GridColumn>
+        </GridColumns>
+    </TelerikGrid>
+</div>
+
+
+@code {
+    private readonly SearchBloodRequest _vm = new();
+    private readonly TelerikNotification _notification = new();
+    private string _css = "app-hide";
+    private List<BloodRequestSearchRecordDto> _searchResults = new();
+
+    async Task HandleValidSubmit()
+    {
+        if (string.IsNullOrWhiteSpace(_vm.SearchQuery))
+            _vm.SearchQuery = "*";
+        _searchResults = await _mediator.Send(_vm);
+        _css = "";
+        if (_searchResults.Count > 0)
+        {
+            _notification.Show(new NotificationModel
+            {
+                Text = "Records updated.",
+                ThemeColor = "success"
+            });
+        }
+        else
+        {
+            _notification.Show(new NotificationModel
+            {
+                Text = "Records updated, no records found.",
+                ThemeColor = "error"
+            });
+        }
+    }
+
+    void HandleInvalidSubmit()
+    {
+        _notification.Show(new NotificationModel
+        {
+            Text = "Please resolve the errors and try again",
+            ThemeColor = "error"
+        });
+        _css = "app-hide";
+    }
+
+    private void OnSelection(GridRowClickEventArgs args)
+    {
+        if (args.Item is BloodRequestSearchRecordDto item)
+            _navManager.NavigateTo($"blood-donation-request/{item.RequestId}");
+    }
+
+}

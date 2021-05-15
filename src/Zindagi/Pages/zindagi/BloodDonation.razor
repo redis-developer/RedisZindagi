@@ -1,0 +1,88 @@
+﻿@page "/blood-donation"
+@attribute [Authorize]
+
+<h3>Blood Donation</h3>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-8 col-lg-4 mx-auto">
+            <TelerikForm Model="@_vm" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit" ValidationMessageType="@FormValidationMessageType.Inline">
+                <FormValidation>
+                    <FluentValidationValidator DisableAssemblyScanning="@true"/>
+                </FormValidation>
+                <FormItems>
+                    <FormItem LabelText="Patient Name" Field="@(nameof(_vm.PatientName))"/>
+                    <FormItem LabelText="Reason" Field="@(nameof(_vm.Reason))" Hint="Please write approriate reason, helps people to respond quickly."/>
+                    <FormItem Field="@(nameof(_vm.BloodGroup))">
+                        <Template>
+                            <label for="@(nameof(_vm.BloodGroup))" class="k-label k-form-label">Blood Group</label>
+                            <TelerikDropDownList @bind-Value="@_vm.BloodGroup" Data="Enumeration.GetKeyValues<BloodGroup>()" ValueField="Key" TextField="Value" Width="100%"></TelerikDropDownList>
+                            <TelerikValidationMessage For="@(() => _vm.BloodGroup)"></TelerikValidationMessage>
+                        </Template>
+                    </FormItem>
+                    <FormItem Field="@(nameof(_vm.DonationType))">
+                        <Template>
+                            <label for="@(nameof(_vm.DonationType))" class="k-label k-form-label">Blood Donation Type</label>
+                            <TelerikDropDownList @bind-Value="@_vm.DonationType" Data="Enumeration.GetKeyValues<BloodDonationType>()" ValueField="Key" TextField="Value" Width="100%"></TelerikDropDownList>
+                            <TelerikValidationMessage For="@(() => _vm.DonationType)"></TelerikValidationMessage>
+                        </Template>
+                    </FormItem>
+                    <FormItem Field="@(nameof(_vm.Priority))">
+                        <Template>
+                            <label for="@(nameof(_vm.Priority))" class="k-label k-form-label">@nameof(_vm.Priority)</label>
+                            <TelerikDropDownList @bind-Value="@_vm.Priority" Data="Enumeration.GetKeyValues<BloodRequestPriority>()" ValueField="Key" TextField="Value" Width="100%"></TelerikDropDownList>
+                            <TelerikValidationMessage For="@(() => _vm.Priority)"></TelerikValidationMessage>
+                        </Template>
+                    </FormItem>
+                    <FormItem Field="@(nameof(_vm.QuantityInUnits))" Hint="One unit is 450 ml."/>
+                </FormItems>
+                <FormButtons>
+                    <TelerikButton ButtonType="ButtonType.Submit" Primary="true">Apply</TelerikButton>
+                </FormButtons>
+            </TelerikForm>
+        </div>
+    </div>
+</div>
+
+<TelerikNotification @ref="Notification"
+                     HorizontalPosition="NotificationHorizontalPosition.Right"
+                     VerticalPosition="NotificationVerticalPosition.Bottom">
+</TelerikNotification>
+
+@code {
+    private CreateBloodRequest _vm = new();
+    private TelerikNotification Notification { get; set; } = null!;
+
+    async Task HandleValidSubmit()
+    {
+        var result = await _mediator.Send(_vm);
+        if (result.IsSuccess)
+        {
+            Notification.Show(new NotificationModel
+            {
+                Text = "Request created, thank you.",
+                ThemeColor = "success"
+            });
+            _vm = new CreateBloodRequest();
+        }
+        else
+        {
+            Notification.Show(new NotificationModel
+            {
+                Text = "Request not created, please try again.",
+                ThemeColor = "error"
+            });
+        }
+    }
+
+    void HandleInvalidSubmit()
+    {
+        Notification.Show(new NotificationModel
+        {
+            Text = "Please complete all the fields and try again.",
+            ThemeColor = "warning",
+            CloseAfter = 0
+        });
+    }
+
+}

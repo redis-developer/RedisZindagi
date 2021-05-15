@@ -1,0 +1,39 @@
+@layout TelerikLayout
+@inherits LayoutComponentBase
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top" aria-label="Zindagi Navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/"> <img src="assets/icon.png" width="40" alt="icon"/> Zindagi</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarMain">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <NavLink href="/home" class="nav-link text-white">
+                            <i class="bi bi-house-door"></i>
+                            Home
+                        </NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink href="blood-donation" class="nav-link text-white">
+                            <i class="bi bi-droplet" width="16" height="16"></i>
+                            Blood Donation
+                        </NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink href="requests" class="nav-link text-white">
+                            <i class="bi bi-people-fill" width="16" height="16"></i>
+                            Requests
+                        </NavLink>
+                    </li>
+                </ul>
+                <AccessControl/>
+            </div>
+        </div>
+    </nav>
+</header>
+<main class="px-4">
+    @Body
+</main>
