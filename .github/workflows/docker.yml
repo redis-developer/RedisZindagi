@@ -62,6 +62,9 @@ jobs:
           echo VERSION=$VERSION
 
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
+          docker tag $IMAGE_NAME $IMAGE_ID:latest
           # docker tag $IMAGE_NAME $IMAGE_ID:$RUN_ID
+
           docker push $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:latest
           # docker push $IMAGE_ID:$RUN_ID

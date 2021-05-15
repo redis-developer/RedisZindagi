@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+  redismod:
+    image: redislabs/redismod
+    container_name: redis
+    restart: unless-stopped
+    environment:
+      EMAIL: zindagi@bhanu.dev
+    volumes:
+      - ./persistence/redismod/data:/data
+    networks:
+      - default
+    ports:
+      - 6379:6379
+
+  rediszindagi:
+    image: ghcr.io/bhanukorthiwada/rediszindagi:latest
+    container_name: zindagi
+    restart: unless-stopped
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${APP_ENV}
+      AUTH0__DOMAIN: ${APP_AUTH0_DOMAIN}
+      AUTH0__CLIENTID: ${APP_AUTH0_DOMAIN}
+      AUTH0__CLIENTSECRET: ${APP_AUTH0_DOMAIN}
+      SMTP__DISABLE: ${APP_SMTP_DISABLE}
+      SMTP__FROM: ${APP_SMTP_FROM}
+      SMTP__HOST: ${APP_SMTP_HOST}
+      SMTP__PORT: ${APP_SMTP_PORT}
+      SMTP__USERNAME: ${APP_SMTP_USERNAME}
+      SMTP__PASSWORD: ${APP_SMTP_PASSWORD}
+      SMTP__USESSL: ${APP_SMTP_USESSL}
+    volumes:
+      - ./persistence/zindagi/logs:/app/logs
+    networks:
+      - default
+    ports:
+      - 80:80
+    depends_on:
+      - redismod
+
+networks:
+  default:
+    name: network_default
+    driver: bridge
