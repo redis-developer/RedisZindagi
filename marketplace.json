@@ -1,0 +1,33 @@
+{
+  "app_name": "Zindagi",
+  "description": "Platform to manage blood donations",
+  "hidden": true,
+  "rank": 21,
+  "type": "Full App",
+  "contributed_by": "Community",
+  "repo_url": "https://github.com/BhanuKorthiwada/RedisZindagi",
+  "download_url": "https://github.com/BhanuKorthiwada/RedisZindagi/archive/refs/heads/main.zip",
+  "hosted_url": "https://zindagi.bhanu.dev",
+  "quick_deploy": false,
+  "deploy_buttons": [],
+  "language": ["C#", "Blazor"],
+  "redis_commands": [
+    "JSON.SET",
+    "JSON.GET",
+    "FT.CREATE",
+    "FT.SEARCH",
+    "HSET",
+    "JSON.TYPE"
+  ],
+  "redis_features": ["caching"],
+  "redis_modules": ["RedisJSON", "RediSearch"],
+  "app_image_urls": [
+    "https://github.com/BhanuKorthiwada/RedisZindagi/blob/main/docs/images/001.png?raw=true",
+    "https://github.com/BhanuKorthiwada/RedisZindagi/blob/main/docs/images/002.png?raw=true",
+    "https://github.com/BhanuKorthiwada/RedisZindagi/blob/main/docs/images/003.png?raw=true"
+  ],
+  "youtube_url": "",
+  "special_tags": ["Hackathon"],
+  "verticals": ["Healthcare"],
+  "markdown": "https://raw.githubusercontent.com/BhanuKorthiwada/RedisZindagi/main/README.md"
+}
