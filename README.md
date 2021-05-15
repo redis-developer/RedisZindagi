@@ -33,16 +33,16 @@ Blood donation management app using Redis JSON, Redis Search and C# Blazor
 
 * The request data is stored in various keys and various data types.
     * For each of request:
-        * ID : Guid as a string
-        * Blood Group, Donation Type, Priority, Status: C# ENUM
+        * ID : `Guid` as a string
+        * Blood Group, Donation Type, Priority, Status: C# `ENUM`
 
 * Redis JSON
     * User Profile Key:
-        prefix: USER_PROFILE
+        prefix: `USER_PROFILE`
         postfix: Auth0 name identifier
 
     * Request Key:
-        prefix: BLOOD_REQUEST
+        prefix: `BLOOD_REQUEST`
         postfix: Guid string
 
 * Redis Publish:
@@ -67,6 +67,23 @@ Blood donation management app using Redis JSON, Redis Search and C# Blazor
 ### Local installation
 
 Clone the project  
-Go to `/src/Zindagi` folder, update `appsettings.json` with [Auth0 (refer for detailed steps)](https://auth0.com/blog/what-is-blazor-tutorial-on-building-webapp-with-authentication/) and Redis Connection String then:
+Go to `/src/Zindagi` folder, update `appsettings.json` with below details
+    - [Auth0 (refer for detailed steps)](https://auth0.com/blog/what-is-blazor-tutorial-on-building-webapp-with-authentication/)
+    - Redis Connection String
+    - SMTP details (optional)
 
 run `dotnet run`
+
+visit application using [localhost with SSL](https://localhost:5001) or [localhost](http://localhost:5000)
+
+Application will be up and running
+
+### Local installation using docker
+
+Clone the project
+
+Update `.env` file with **Auth0** and **SMTP** details
+
+From terminal/command prompt run `docker compose up -d`
+
+Application can be accessing using [localhost](http://localhost:80)
