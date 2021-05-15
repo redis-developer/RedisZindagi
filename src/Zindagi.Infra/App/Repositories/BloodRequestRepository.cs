@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -78,6 +78,7 @@ namespace Zindagi.Infra.App.Repositories
             var userInfo = await _userRepository.GetAsync(request.OpenIdKey);
 
             await _mediator.Publish(new SendEmailNotification(new List<MailboxAddress> { new(userInfo.FullName, userInfo.Email) }, "New Request Created [Blood]", $"Request for blood is created.<br/> Request ID: {request.Id}"));
+            await db.PublishAsync("URN:BLOOD_REQUESTS:NEW", result.Id.ToString());
             return result;
         }
 
@@ -86,6 +87,23 @@ namespace Zindagi.Infra.App.Repositories
             var db = _connectionMultiplexer.GetDatabase();
             var result = await db.JsonGetAsync<BloodRequest>(GetPersistenceKey(id));
             return result;
+        }
+
+        public async Task<bool> UpdateRequestStatus(Guid id, OpenIdKey openIdKey, DetailedStatusList status)
+        {
+            var db = _connectionMultiplexer.GetDatabase();
+            await db.JsonSetAsync(GetPersistenceKey(id), JsonSerializer.Serialize(status, _jsonSerializerOptions), ".Status");
+
+#pragma warning disable IDE0072 // Add missing cases
+            var path = status switch
+#pragma warning restore IDE0072 // Add missing cases
+            {
+                DetailedStatusList.Assigned => ".AssignedBy",
+                DetailedStatusList.Cancelled => ".CancelledBy",
+                _ => ".ActionBy",
+            };
+            var result = await db.JsonSetAsync(GetPersistenceKey(id), JsonSerializer.Serialize(openIdKey.GetPersistenceKey(), _jsonSerializerOptions), path);
+            return result.IsSuccess;
         }
 
         public async Task<List<BloodRequestSearchRecordDto>> SearchRequestsAsync(string searchString)
@@ -106,31 +124,50 @@ namespace Zindagi.Infra.App.Repositories
             if (searchResult == null)
                 return requests;
 
-            foreach (var doc in searchResult.Documents)
-            {
-                var record = doc.GetProperties().ToList();
+            ////foreach (var doc in searchResult.Documents)
+            ////{
+            ////    var record = doc.GetProperties().ToList();
+            ////    var status = int.Parse(record.FirstOrDefault(p => p.Key == "status").Value.ToString() ?? string.Empty, CultureInfo.InvariantCulture);
+            ////    if (status > 2)
+            ////        continue;
 
-                var request = new BloodRequestSearchRecordDto
+            ////    var request = new BloodRequestSearchRecordDto
+            ////    {
+            ////        SearchId = doc.Id,
+            ////        SearchScore = doc.Score,
+            ////        RequestId = Guid.Parse(doc.Id),
+            ////        PatientName = record.FirstOrDefault(p => p.Key == "patientName").Value.ToString(),
+            ////        Reason = record.FirstOrDefault(p => p.Key == "reason").Value.ToString(),
+            ////        QuantityInUnits = double.Parse(record.FirstOrDefault(p => p.Key == "units").Value.ToString(), CultureInfo.InvariantCulture),
+            ////        DonationType = Enumeration.FromValue<BloodDonationType>(record.FirstOrDefault(p => p.Key == "donationType").Value.ToString()).Name,
+            ////        BloodGroup = Enumeration.FromValue<BloodGroup>(record.FirstOrDefault(p => p.Key == "bloodGroup").Value.ToString()).Name,
+            ////        Priority = Enumeration.FromValue<BloodRequestPriority>(record.FirstOrDefault(p => p.Key == "priority").Value.ToString()).Name,
+            ////        Status = Enumeration.FromValue<DetailedStatus>(status).Name
+            ////    };
+
+            ////    requests.Add(request);
+            ////}
+
+            var db = _connectionMultiplexer.GetDatabase();
+            var result = await db.JsonMultiGetAsync<BloodRequest>(searchResult.Documents.Select(q => new RedisKey(GetPersistenceKey(q.Id))).ToArray());
+            var filteredResult = result.Where(q => q.Status is DetailedStatusList.Open or DetailedStatusList.Assigned)
+                .Select(q => new BloodRequestSearchRecordDto()
                 {
-                    SearchId = doc.Id,
-                    SearchScore = doc.Score,
-                    RequestId = Guid.Parse(doc.Id),
-                    PatientName = record.FirstOrDefault(p => p.Key == "patientName").Value.ToString(),
-                    Reason = record.FirstOrDefault(p => p.Key == "reason").Value.ToString(),
-                    QuantityInUnits = double.Parse(record.FirstOrDefault(p => p.Key == "units").Value.ToString(), CultureInfo.InvariantCulture),
-                    DonationType = Enumeration.FromValue<BloodDonationType>(record.FirstOrDefault(p => p.Key == "donationType").Value.ToString()).Name,
-                    BloodGroup = Enumeration.FromValue<BloodGroup>(record.FirstOrDefault(p => p.Key == "bloodGroup").Value.ToString()).Name,
-                    Priority = Enumeration.FromValue<BloodRequestPriority>(record.FirstOrDefault(p => p.Key == "priority").Value.ToString()).Name,
-                    Status = Enumeration.FromValue<DetailedStatus>(record.FirstOrDefault(p => p.Key == "status").Value.ToString() ?? string.Empty).Name
-                };
-
-                requests.Add(request);
-            }
-
+                    Status = q.Status.GetDescription(),
+                    RequestId = q.Id,
+                    PatientName = q.PatientName,
+                    Reason = q.Reason,
+                    BloodGroup = q.BloodGroup.GetDescription(),
+                    DonationType = q.DonationType.GetDescription(),
+                    Priority = q.Priority.GetDescription(),
+                    QuantityInUnits = q.QuantityInUnits
+                });
+            requests.AddRange(filteredResult);
             return requests;
         }
 
         private static string GetPersistenceKey(Guid id) => $"BLOODREQUEST:{id}".ToUpper(CultureInfo.InvariantCulture);
+        private static string GetPersistenceKey(string id) => $"BLOODREQUEST:{id}".ToUpper(CultureInfo.InvariantCulture);
 
         private bool IndexExistsAsync(string checkIndexName)
         {

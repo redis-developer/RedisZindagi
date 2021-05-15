@@ -13,7 +13,15 @@
                 “You Can’t Buy A Life For Someone With Money, But You Can Save A Life Of Someone By Donating Blood To Him.
             </p>
             <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                <a href="login?redirectUri=/user-profile" class="btn btn-primary btn-lg px-4 me-md-2">Register now</a>
+                <AuthorizeView>
+                    <Authorized>
+                        <a href="requests" class="btn btn-primary btn-lg px-4 me-md-2">View Requests</a>
+                    </Authorized>
+                    <NotAuthorized>
+                        <a href="login?redirectUri=/@Uri.EscapeDataString(_navManager.ToBaseRelativePath(_navManager.Uri))" class="btn btn-primary btn-lg px-4 me-md-2">Register now</a>
+                    </NotAuthorized>
+                </AuthorizeView>
+                
                 <a href="mailto:zindagi@bhanu.dev" class="btn btn-outline-secondary btn-lg px-4">Contact us</a>
             </div>
         </div>

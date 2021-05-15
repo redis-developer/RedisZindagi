@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Zindagi.Domain.RequestsAggregate.ViewModels;
+using Zindagi.SeedWork;
 
 namespace Zindagi.Domain.RequestsAggregate
 {
@@ -10,6 +11,8 @@ namespace Zindagi.Domain.RequestsAggregate
         Task<BloodRequest> CreateAsync(BloodRequest request);
 
         Task<BloodRequest> GetAsync(Guid id);
+
+        Task<bool> UpdateRequestStatus(Guid id, OpenIdKey openIdKey, DetailedStatusList status);
 
         Task<List<BloodRequestSearchRecordDto>> SearchRequestsAsync(string searchString);
     }

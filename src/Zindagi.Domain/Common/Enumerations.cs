@@ -128,11 +128,17 @@ namespace Zindagi.Domain
     {
         [Description("-SELECT-")]
         None = 0,
+        [Description("OPEN")]
         Open = 1,
+        [Description("ASSIGNED")]
         Assigned = 2,
+        [Description("CANCELLED")]
         Cancelled = 3,
+        [Description("DUPLICATE")]
         Duplicate = 4,
+        [Description("REJECTED")]
         Rejected = 5,
+        [Description("FULFILLED")]
         Fulfilled = 6
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Threading;
+using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 using MediatR.Pipeline;
 using Microsoft.Extensions.Logging;
@@ -6,6 +7,7 @@ using Zindagi.SeedWork;
 
 namespace Zindagi.Infra.Behaviors
 {
+    [DebuggerStepThrough]
     public class LoggingPreProcessor<TRequest> : IRequestPreProcessor<TRequest> where TRequest : notnull
     {
         private readonly ICurrentUser _currentUserService;

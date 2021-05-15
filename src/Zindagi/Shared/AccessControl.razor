@@ -5,7 +5,7 @@
             <a class="nav-link text-white" href="logout">Log out</a>
         </Authorized>
         <NotAuthorized>
-            <a class="nav-link text-white" href="login?redirectUri=/user-profile">Register / Log in</a>
+            <a class="nav-link text-white" href="login?redirectUri=/@Uri.EscapeDataString(_navManager.ToBaseRelativePath(_navManager.Uri))">Register / Log in</a>
         </NotAuthorized>
     </AuthorizeView>
 </div>

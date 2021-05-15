@@ -1,10 +1,12 @@
-﻿using System;
+using System;
+using Zindagi.SeedWork;
 
 namespace Zindagi.Domain.RequestsAggregate.ViewModels
 {
     public class BloodRequestDto
     {
         public Guid Id { get; set; }
+        public OpenIdKey OpenIdKey { get; set; } = null!;
         public string PatientName { get; set; } = string.Empty;
 
         public string Reason { get; set; } = string.Empty;

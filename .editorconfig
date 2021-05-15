@@ -251,6 +251,8 @@ csharp_preserve_single_line_blocks = true
 dotnet_naming_style.app_private_field_style.capitalization = camel_case
 dotnet_naming_style.app_private_field_style.required_prefix = _
 
+dotnet_naming_style.app_constant_style.capitalization = all_upper
+
 # camel_case_style - Define the camelCase style
 dotnet_naming_style.camel_case_style.capitalization = camel_case
 # pascal_case_style - Define the PascalCase style
@@ -284,7 +286,7 @@ dotnet_naming_symbols.public_protected_constant_fields_group.applicable_accessib
 dotnet_naming_symbols.public_protected_constant_fields_group.required_modifiers         = const
 dotnet_naming_symbols.public_protected_constant_fields_group.applicable_kinds           = field
 dotnet_naming_rule.public_protected_constant_fields_must_be_pascal_case_rule.symbols    = public_protected_constant_fields_group
-dotnet_naming_rule.public_protected_constant_fields_must_be_pascal_case_rule.style      = pascal_case_style
+dotnet_naming_rule.public_protected_constant_fields_must_be_pascal_case_rule.style      = app_constant_style
 dotnet_naming_rule.public_protected_constant_fields_must_be_pascal_case_rule.severity   = warning
 
 # All public/protected/protected_internal static readonly fields must be PascalCase
@@ -317,7 +319,7 @@ dotnet_naming_symbols.stylecop_constant_fields_group.applicable_accessibilities 
 dotnet_naming_symbols.stylecop_constant_fields_group.required_modifiers         = const
 dotnet_naming_symbols.stylecop_constant_fields_group.applicable_kinds           = field
 dotnet_naming_rule.stylecop_constant_fields_must_be_pascal_case_rule.symbols    = stylecop_constant_fields_group
-dotnet_naming_rule.stylecop_constant_fields_must_be_pascal_case_rule.style      = pascal_case_style
+dotnet_naming_rule.stylecop_constant_fields_must_be_pascal_case_rule.style      = app_constant_style
 dotnet_naming_rule.stylecop_constant_fields_must_be_pascal_case_rule.severity   = warning
 
 # All static readonly fields must be PascalCase
