@@ -9,20 +9,21 @@
         <div class="col-lg-8">
             <h1 class="display-5 fw-bold lh-1 mb-3">Donate Blood, Save Lives.</h1>
             <p class="lead">
-                There is a hope of life to someone in your blood donation.<br />
+                There is a hope of life to someone in your blood donation.
+                <br /><br />
                 “You Can’t Buy A Life For Someone With Money, But You Can Save A Life Of Someone By Donating Blood To Him.
             </p>
             <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                 <AuthorizeView>
                     <Authorized>
                         <a href="requests" class="btn btn-primary btn-lg px-4 me-md-2">View Requests</a>
+                        <a href="blood-donation" class="btn btn-outline-secondary btn-lg px-4">Donate now</a>
                     </Authorized>
                     <NotAuthorized>
                         <a href="login?redirectUri=/@Uri.EscapeDataString(_navManager.ToBaseRelativePath(_navManager.Uri))" class="btn btn-primary btn-lg px-4 me-md-2">Register now</a>
+                        <a href="login?redirectUri=/@Uri.EscapeDataString("blood-donation")" class="btn btn-outline-secondary btn-lg px-4">Donate now</a>
                     </NotAuthorized>
                 </AuthorizeView>
-                
-                <a href="mailto:zindagi@bhanu.dev" class="btn btn-outline-secondary btn-lg px-4">Contact us</a>
             </div>
         </div>
     </div>

@@ -1,18 +1,18 @@
 @page "/blood-donation"
 @attribute [Authorize]
 
-<h3 class="mt-3">Blood Donation</h3>
+<h4 class="m-4 text-center">Blood Donation</h4>
 
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-8 col-lg-4 mx-auto">
             <TelerikForm Model="@_vm" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit" ValidationMessageType="@FormValidationMessageType.Inline">
                 <FormValidation>
-                    <FluentValidationValidator DisableAssemblyScanning="@true"/>
+                    <FluentValidationValidator DisableAssemblyScanning="@true" />
                 </FormValidation>
                 <FormItems>
-                    <FormItem LabelText="Patient Name" Field="@(nameof(_vm.PatientName))"/>
-                    <FormItem LabelText="Reason" Field="@(nameof(_vm.Reason))" Hint="Please write approriate reason, helps people to respond quickly."/>
+                    <FormItem LabelText="Patient Name" Field="@(nameof(_vm.PatientName))" />
+                    <FormItem LabelText="Reason" Field="@(nameof(_vm.Reason))" Hint="Please write approriate reason, helps people to respond quickly." />
                     <FormItem Field="@(nameof(_vm.BloodGroup))">
                         <Template>
                             <label for="@(nameof(_vm.BloodGroup))" class="k-label k-form-label">Blood Group</label>
@@ -34,10 +34,10 @@
                             <TelerikValidationMessage For="@(() => _vm.Priority)"></TelerikValidationMessage>
                         </Template>
                     </FormItem>
-                    <FormItem Field="@(nameof(_vm.QuantityInUnits))" Hint="One unit is 450 ml."/>
+                    <FormItem Field="@(nameof(_vm.QuantityInUnits))" Hint="One unit is 450 ml." />
                 </FormItems>
                 <FormButtons>
-                    <TelerikButton ButtonType="ButtonType.Submit" Primary="true">Apply</TelerikButton>
+                    <TelerikButton ButtonType="ButtonType.Submit" Primary="true">Submit</TelerikButton>
                 </FormButtons>
             </TelerikForm>
         </div>
