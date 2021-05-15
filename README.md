@@ -18,15 +18,7 @@ Blood donation management app using Redis JSON, Redis Search and C# Blazor
 
 # Images
 
-<a href="https://github.com/BhanuKorthiwada/RedisZindagi/blob/main/docs/images/001.png?raw=true"><img src="https://github.com/BhanuKorthiwada/RedisZindagi/blob/main/docs/images/001.png?raw=true" width="100%" height="auto"></a>
-
-<a href="https://github.com/BhanuKorthiwada/RedisZindagi/blob/main/docs/images/002.png?raw=true"><img src="https://github.com/BhanuKorthiwada/RedisZindagi/blob/main/docs/images/002.png?raw=true" width="50%" height="auto"></a>
-
-<a href="https://github.com/BhanuKorthiwada/RedisZindagi/blob/main/docs/images/003.png?raw=true"><img src="https://github.com/BhanuKorthiwada/RedisZindagi/blob/main/docs/images/003.png?raw=true" width="50%" height="auto"></a>
-
-<a href="https://github.com/BhanuKorthiwada/RedisZindagi/blob/main/docs/images/004.png?raw=true"><img src="https://github.com/BhanuKorthiwada/RedisZindagi/blob/main/docs/images/004.png?raw=true" width="50%" height="auto"></a>
-
-<a href="https://github.com/BhanuKorthiwada/RedisZindagi/blob/main/docs/images/005.png?raw=true"><img src="https://github.com/BhanuKorthiwada/RedisZindagi/blob/main/docs/images/005.png?raw=true" width="50%" height="auto"></a>
+<a href="https://github.com/BhanuKorthiwada/RedisZindagi/blob/main/docs/images/001.png?raw=true"><img src="https://github.com/BhanuKorthiwada/RedisZindagi/blob/main/docs/images/001.png?raw=true" width="100%" height="auto"></a><a href="https://github.com/BhanuKorthiwada/RedisZindagi/blob/main/docs/images/002.png?raw=true"><img src="https://github.com/BhanuKorthiwada/RedisZindagi/blob/main/docs/images/002.png?raw=true" width="50%" height="auto"></a><a href="https://github.com/BhanuKorthiwada/RedisZindagi/blob/main/docs/images/003.png?raw=true"><img src="https://github.com/BhanuKorthiwada/RedisZindagi/blob/main/docs/images/003.png?raw=true" width="50%" height="auto"></a><a href="https://github.com/BhanuKorthiwada/RedisZindagi/blob/main/docs/images/004.png?raw=true"><img src="https://github.com/BhanuKorthiwada/RedisZindagi/blob/main/docs/images/004.png?raw=true" width="50%" height="auto"></a><a href="https://github.com/BhanuKorthiwada/RedisZindagi/blob/main/docs/images/005.png?raw=true"><img src="https://github.com/BhanuKorthiwada/RedisZindagi/blob/main/docs/images/005.png?raw=true" width="50%" height="auto"></a>
 
 ## How it works
 ### How the data is stored:
