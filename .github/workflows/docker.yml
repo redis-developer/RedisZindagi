@@ -9,7 +9,7 @@ on:
   pull_request:
 
 env:
-  IMAGE_NAME: zindagiblazor
+  IMAGE_NAME: rediszindagi
   RUN_ID: ${{ github.run_id }}
 
 jobs:
