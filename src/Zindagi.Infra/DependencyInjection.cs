@@ -61,7 +61,7 @@ namespace Zindagi.Infra
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IBloodRequestRepository, BloodRequestRepository>();
 
-            services.AddScoped<IBloodRequestsSearchRepository, BloodRequestsSearchRepository>();
+            services.AddTransient<IBloodRequestsSearchRepository, BloodRequestsSearchRepository>();
         }
     }
 }
