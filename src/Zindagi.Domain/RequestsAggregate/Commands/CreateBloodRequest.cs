@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using Zindagi.Domain.RequestsAggregate.ViewModels;
 using Zindagi.SeedWork;
 

@@ -6,7 +6,6 @@ namespace Zindagi.Domain.UserAggregate
 {
     public interface IUserRepository
     {
-        Task<User> GetCurrentUserAsync();
         Task<User> GetAsync(OpenIdKey openIdKey);
         Task<User?> CreateAsync(User newUser);
         Task<User> UpdateAsync(OpenIdKey openIdKey, UpdateUserInfo userInfo);

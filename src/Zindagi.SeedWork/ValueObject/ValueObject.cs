@@ -148,7 +148,7 @@ namespace Zindagi.SeedWork
             var type = obj.GetType();
             var typeString = type.ToString();
 
-            if (typeString.Contains(castleProxies) || typeString.EndsWith(nHibernateProxyPostfix, StringComparison.InvariantCultureIgnoreCase))
+            if (typeString.Contains(castleProxies) || typeString.EndsWith(nHibernateProxyPostfix, StringComparison.Ordinal))
                 return type.BaseType;
 
             return type;

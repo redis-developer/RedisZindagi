@@ -8,6 +8,7 @@ using Zindagi.Domain.RequestsAggregate;
 using Zindagi.Domain.UserAggregate;
 using Zindagi.Infra.App;
 using Zindagi.Infra.App.Repositories;
+using Zindagi.Infra.BackgroundJobs;
 using Zindagi.Infra.JsonConverters;
 using Zindagi.Infra.Options;
 using Zindagi.Infra.Redis;
@@ -47,6 +48,8 @@ namespace Zindagi.Infra
 
             NReJSONSerializer.SerializerProxy = new ReJsonSerializerProxy(jsonOptions);
 
+            services.AddHostedService<NewRequestProcessingService>();
+
             // Singleton: creates a new instance only once during the application lifetime
             // Scoped: creates a new instance for every request
             // Transient: creates a new instance every time you request it
@@ -57,6 +60,8 @@ namespace Zindagi.Infra
 
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IBloodRequestRepository, BloodRequestRepository>();
+
+            services.AddScoped<IBloodRequestsSearchRepository, BloodRequestsSearchRepository>();
         }
     }
 }

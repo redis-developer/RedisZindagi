@@ -170,7 +170,7 @@ dotnet_remove_unnecessary_suppression_exclusions = none:warning
 
 # C# Unnecessary code rules
 [*.{cs,csx,cake}]
-csharp_style_unused_value_expression_statement_preference = discard_variable:silent
+csharp_style_unused_value_expression_statement_preference = discard_variable:none
 dotnet_diagnostic.IDE0058.severity = suggestion
 csharp_style_unused_value_assignment_preference = discard_variable:suggestion
 dotnet_diagnostic.IDE0059.severity = suggestion
@@ -422,3 +422,6 @@ dotnet_diagnostic.S3875.severity = none
 
 # S1144: Unused private types or members should be removed
 dotnet_diagnostic.S1144.severity = none
+
+# IDE0072: Add missing switch cases
+dotnet_diagnostic.IDE0072.severity = silent

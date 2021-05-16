@@ -9,10 +9,10 @@ namespace Zindagi.Domain.RequestsAggregate.QueryHandlers
 {
     public class SearchBloodRequestHandler : IRequestHandler<SearchBloodRequest, List<BloodRequestSearchRecordDto>>
     {
-        private readonly IBloodRequestRepository _repository;
+        private readonly IBloodRequestsSearchRepository _repository;
 
-        public SearchBloodRequestHandler(IBloodRequestRepository repository) => _repository = repository;
+        public SearchBloodRequestHandler(IBloodRequestsSearchRepository repository) => _repository = repository;
 
-        public async Task<List<BloodRequestSearchRecordDto>> Handle(SearchBloodRequest request, CancellationToken cancellationToken) => await _repository.SearchRequestsAsync(request.SearchQuery);
+        public async Task<List<BloodRequestSearchRecordDto>> Handle(SearchBloodRequest request, CancellationToken cancellationToken) => await _repository.GetSearchResultsFromDbAsync(request.SearchQuery);
     }
 }

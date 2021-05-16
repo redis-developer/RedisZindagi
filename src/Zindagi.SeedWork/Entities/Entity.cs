@@ -1,5 +1,4 @@
-﻿using System;
-using System.Globalization;
+using System;
 
 namespace Zindagi.SeedWork
 {
@@ -11,7 +10,7 @@ namespace Zindagi.SeedWork
 
         public override string ToString() => $"[ENTITY: {GetType().Name}] Id = {Id}";
 
-        public virtual string GetPersistenceKey() => $"{GetType().Name}:{Id}".ToUpper(CultureInfo.InvariantCulture);
+        public virtual string GetPersistenceKey() => $"{GetType().Name}:{Id}".ToUpperInvariant();
     }
 
     public interface IAggregateRoot { }

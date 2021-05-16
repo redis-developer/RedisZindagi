@@ -70,7 +70,7 @@ namespace Zindagi.Infra.Auth
                             var postLogoutUri = context.Properties.RedirectUri;
                             if (!string.IsNullOrEmpty(postLogoutUri))
                             {
-                                if (postLogoutUri.StartsWith("/", StringComparison.InvariantCultureIgnoreCase))
+                                if (postLogoutUri.StartsWith("/", StringComparison.Ordinal))
                                 {
                                     var request = context.Request;
                                     postLogoutUri = request.Scheme + "://" + request.Host + request.PathBase + postLogoutUri;

@@ -14,14 +14,12 @@ namespace Zindagi.Infra.App.Repositories
         private readonly IConnectionMultiplexer _connectionMultiplexer;
         private readonly JsonSerializerOptions _jsonSerializerOptions;
         private readonly ILogger<UserRepository> _logger;
-        private readonly ICurrentUser _currentUser;
 
-        public UserRepository(IConnectionMultiplexer connectionMultiplexer, JsonSerializerOptions jsonSerializerOptions, ILogger<UserRepository> logger, ICurrentUser currentUser)
+        public UserRepository(IConnectionMultiplexer connectionMultiplexer, JsonSerializerOptions jsonSerializerOptions, ILogger<UserRepository> logger)
         {
             _connectionMultiplexer = connectionMultiplexer;
             _jsonSerializerOptions = jsonSerializerOptions;
             _logger = logger;
-            _currentUser = currentUser;
         }
 
         public async Task<User?> CreateAsync(User newUser)
@@ -32,14 +30,6 @@ namespace Zindagi.Infra.App.Repositories
 
             _logger.LogDebug("[User] [INSERT] {json} [{result}]", json, persistenceResult.IsSuccess);
             return await GetAsync(newUser.AlternateId);
-        }
-
-        public async Task<User> GetCurrentUserAsync()
-        {
-            var currentUser = await _currentUser.GetOpenIdKey();
-            if (currentUser.IsSuccess)
-                return await GetAsync(currentUser.Value);
-            return null!;
         }
 
         public async Task<User> GetAsync(OpenIdKey openIdKey)
