@@ -1,15 +1,21 @@
 {
   "app_name": "Zindagi",
   "description": "Platform to manage blood donations",
-  "hidden": true,
-  "rank": 21,
+  "rank": 331,
   "type": "Full App",
   "contributed_by": "Community",
-  "repo_url": "https://github.com/BhanuKorthiwada/RedisZindagi",
-  "download_url": "https://github.com/BhanuKorthiwada/RedisZindagi/archive/refs/heads/main.zip",
+  "repo_url": "https://github.com/redis-developer/RedisZindagi",
+  "download_url": "https://github.com/redis-developer/RedisZindagi/archive/refs/heads/main.zip",
   "hosted_url": "https://zindagi.bhanu.dev",
-  "quick_deploy": false,
-  "deploy_buttons": [],
+  "quick_deploy": "true",
+    "deploy_buttons": [
+        {
+            "heroku": "https://heroku.com/deploy?template=https://github.com/redis-developer/RedisZindagi.git" 
+        },
+        {
+            "Google": "https://deploy.cloud.run/?git_repo=https://github.com/redis-developer/RedisZindagi.git" 
+        }
+    ],
   "language": ["C#", "Blazor"],
   "redis_commands": [
     "JSON.SET",
@@ -22,12 +28,12 @@
   "redis_features": ["caching"],
   "redis_modules": ["RedisJSON", "RediSearch"],
   "app_image_urls": [
-    "https://github.com/BhanuKorthiwada/RedisZindagi/blob/main/docs/images/001.png?raw=true",
-    "https://github.com/BhanuKorthiwada/RedisZindagi/blob/main/docs/images/002.png?raw=true",
-    "https://github.com/BhanuKorthiwada/RedisZindagi/blob/main/docs/images/003.png?raw=true"
+    "https://github.com/redis-developer/RedisZindagi/blob/main/docs/images/001.png?raw=true",
+    "https://github.com/redis-developer/RedisZindagi/blob/main/docs/images/002.png?raw=true",
+    "https://github.com/redis-developer/RedisZindagi/blob/main/docs/images/003.png?raw=true"
   ],
   "youtube_url": "https://www.youtube.com/watch?v=Fy-JcE5TAtw",
   "special_tags": ["Hackathon"],
   "verticals": ["Healthcare"],
-  "markdown": "https://raw.githubusercontent.com/BhanuKorthiwada/RedisZindagi/main/README.md"
+  "markdown": "https://raw.githubusercontent.com/redis-developer/RedisZindagi/main/README.md"
 }
