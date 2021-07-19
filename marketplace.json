@@ -7,7 +7,7 @@
   "repo_url": "https://github.com/redis-developer/RedisZindagi",
   "download_url": "https://github.com/redis-developer/RedisZindagi/archive/refs/heads/main.zip",
   "hosted_url": "https://zindagi.bhanu.dev",
-  "quick_deploy": "true",
+  "quick_deploy": "false",
     "deploy_buttons": [
         {
             "heroku": "https://heroku.com/deploy?template=https://github.com/redis-developer/RedisZindagi.git" 
