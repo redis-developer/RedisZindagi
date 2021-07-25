@@ -2,6 +2,7 @@
   "app_name": "Zindagi",
   "description": "Platform to manage Blood donations powered by RediSearch and RedisJSON",
   "rank": 331,
+  "hidden": "true",
   "type": "Full App",
   "contributed_by": "Community",
   "repo_url": "https://github.com/redis-developer/RedisZindagi",
