@@ -27,7 +27,7 @@
     "HSET",
     "JSON.TYPE"
   ],
-  "redis_features": ["caching"],
+  "redis_features": ["Caching"],
   "redis_modules": ["RedisJSON", "RediSearch"],
   "app_image_urls": [
     "https://github.com/redis-developer/RedisZindagi/blob/main/docs/images/001.png?raw=true",
