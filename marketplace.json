@@ -1,6 +1,6 @@
 {
   "app_name": "Zindagi",
-  "description": "Platform to manage Blood donations powered by RediSearch and RedisJSON",
+  "description": "Platform to manage Blood donations powered by Redis Search and JSON",
   "rank": 230,
   "type": "Full App",
   "contributed_by": "Community",
@@ -11,10 +11,10 @@
   "quick_deploy": "false",
     "deploy_buttons": [
         {
-            "heroku": "https://heroku.com/deploy?template=https://github.com/redis-developer/RedisZindagi.git" 
+            "heroku": "https://heroku.com/deploy?template=https://github.com/redis-developer/RedisZindagi.git"
         },
         {
-            "Google": "https://deploy.cloud.run/?git_repo=https://github.com/redis-developer/RedisZindagi.git" 
+            "Google": "https://deploy.cloud.run/?git_repo=https://github.com/redis-developer/RedisZindagi.git"
         }
     ],
   "language": ["C#", "Blazor"],
@@ -26,8 +26,8 @@
     "HSET",
     "JSON.TYPE"
   ],
-  "redis_features": ["Caching"],
-  "redis_modules": ["RedisJSON", "RediSearch"],
+  "redis_use_cases": ["Caching"],
+  "redis_features": ["JSON", "Search and Query"],
   "app_image_urls": [
     "https://github.com/redis-developer/RedisZindagi/blob/main/docs/images/001.png?raw=true",
     "https://github.com/redis-developer/RedisZindagi/blob/main/docs/images/002.png?raw=true",
